@@ -7,8 +7,8 @@ class CFP_Plugin{
 	function __construct()
 	{
 		add_action('init', array($this,'films_post_type'));
-	    add_action('init', array($this,'film_genre_taxonomies'));
-	    add_action( 'init',array( $this,'film_year_taxonomies' ));
+	        add_action('init', array($this,'film_genre_taxonomies'));
+	        add_action( 'init',array( $this,'film_year_taxonomies' ));
 		add_action( 'init', array($this,'film_country_taxonomies' ));
 		add_action( 'init', array($this,'film_actors_taxonomies' ));
 		add_action('pre_get_posts',array($this,'custom_posts_per_page'));
@@ -211,23 +211,23 @@ function film_country_taxonomies() {
 	register_taxonomy( 'actors', array('films'), $args );
 }
 	
-	/*-----------CUSTOM-META BOXES--------------*/
+
 	
-//добавляем шалон для использования вывода количества 6ти постов
+//6 posts func reserved (not used)
 function custom_posts_per_page($query){
 if(is_home()|| ! $query->is_main_query()){  
 	$query->set( 'posts_per_page', 6 );
 	if( is_page(sanitize_title('список-всех-фильмов')) && is_subpage('true')){
-		// Выводим только все посты не на главных страницах
+		// all posts in general page
 		$query->set( 'posts_per_page', -1 );
 			}
 	if( $query->is_post_type_archive('films') ){
-		// Выводим 50 записей если это архив типа записи 'films'
+		// 50 posts type 'films'
 		$query->set( 'posts_per_page', 50 );
 			}
 		}
 	}
-
+/*-----------CUSTOM-META BOXES--------------*/
 function myplugin_add_custom_box(){
 	$screens = array( 'films' );
 	add_meta_box( 'myplugin_sectionid', __('ADD INFO ABOUT FILMS','custom-films-plugin'), array($this,'myplugin_meta_box_callback'), $screens );
@@ -275,7 +275,7 @@ function myplugin_save_postdata( $post_id ) {
 	$cfp_price = sanitize_text_field( $_POST['cfp_price'] );
 	update_post_meta( $post_id, 'cfp_price', $cfp_price );
 	}
-	/*-----------END CUSTOM-META BOXES--------------*/
+/*-----------END CUSTOM-META BOXES--------------*/
 
 public static function get_films($category_slug=null)
 {
