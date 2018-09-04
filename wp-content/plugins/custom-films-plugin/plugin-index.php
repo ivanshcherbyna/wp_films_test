@@ -15,10 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( !class_exists( 'CFP_Plugin' ) ) :
 
 define('CFP_PLUGIN_URL',plugin_dir_url (__FILE__));
+define('CFP_PLUGIN_PATH',plugin_dir_path(__FILE__));
 
-require_once __DIR__ . '/lib/cfp_class-menu.php';
+
+require_once __DIR__ . '/lib/cfp_class-PageTemplater.php';
 require_once __DIR__ . '/lib/cfp_class-plugin.php';
-
-$film_posts = new CFP_Plugin();
-
+require_once __DIR__ . '/lib/cfp_class-install.php';
+	
+	
+	 	 $film_posts = new CFP_Plugin();
+	 	// $install = new CFP_Install();
+	 	 
+register_deactivation_hook( __FILE__, array('CFP_Install','cfp_get_uninstall') );
+register_activation_hook( __FILE__, array('CFP_Install', 'cfp_get_install') );
 endif;

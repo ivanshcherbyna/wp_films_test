@@ -15,6 +15,7 @@ class CFP_Plugin{
 		
 		add_action('add_meta_boxes', array($this,'myplugin_add_custom_box'));
 		add_action( 'save_post', array($this,'myplugin_save_postdata' ));
+		add_action( 'show_six_films', array($this,'get_films' ));
 	}
 
 	function films_post_type() {
@@ -68,7 +69,6 @@ class CFP_Plugin{
 	register_post_type( 'films', $args );
 }
 	
-	//add_post_meta( $post_id, $meta_key=array('Дата выхода в прокат','Стоимость сеанса'), $meta_value, $unique = false );
 /**
 	 * Create a taxonomy
 	 *
@@ -83,7 +83,7 @@ class CFP_Plugin{
 	function film_genre_taxonomies() {
 	
 		$labels = array(
-			'name'                  => 'Жанры',
+			'name'                  => 'genre',
 			'singular_name'         => 'Жанр' ,
 			'search_items'          => 'Поиск категории',
 			'all_items'             => 'Все категории' ,
@@ -116,17 +116,17 @@ class CFP_Plugin{
 function film_year_taxonomies() {
 	
 		$labels = array(
-			'name'                  => 'Год',
-			'singular_name'         => 'Год' ,
-			'search_items'          => 'Поиск категории',
-			'all_items'             => 'Все категории' ,
-			'parent_item'           => 'Родительская категория' ,
-			'parent_item_colon'     => 'Родительская категория',
-			'edit_item'             => 'Редактировать категорию' ,
-			'update_item'           => 'Обновить категорию' ,
-			'add_new_item'          => 'Добавить новую категорию' ,
-			'new_item_name'         => 'Новое имя категории' ,
-			'menu_name'             => 'Год' 
+			'name'                  => __('year','custom-films-plugin'),
+			'singular_name'         => __('Год' ,'custom-films-plugin'),
+			'search_items'          => __('Поиск категории','custom-films-plugin'),
+			'all_items'             => __('Все категории' ,'custom-films-plugin'),
+			'parent_item'           => __('Родительская категория' ,'custom-films-plugin'),
+			'parent_item_colon'     => __('Родительская категория','custom-films-plugin'),
+			'edit_item'             => __('Редактировать категорию' ,'custom-films-plugin'),
+			'update_item'           => __('Обновить категорию' ,'custom-films-plugin'),
+			'add_new_item'          => __('Добавить новую категорию' ,'custom-films-plugin'),
+			'new_item_name'         => __('Новое имя категории' ,'custom-films-plugin'),
+			'menu_name'             => __('Год', 'custom-films-plugin'),
 		);
 	
 		$args = array(
@@ -150,17 +150,17 @@ function film_year_taxonomies() {
 function film_country_taxonomies() {
 	
 		$labels = array(
-			'name'                  => 'Страна',
-			'singular_name'         => 'Страна' ,
-			'search_items'          => 'Поиск категории',
-			'all_items'             => 'Все категории' ,
-			'parent_item'           => 'Родительская категория' ,
-			'parent_item_colon'     => 'Родительская категория',
-			'edit_item'             => 'Редактировать категорию' ,
-			'update_item'           => 'Обновить категорию' ,
-			'add_new_item'          => 'Добавить новую категорию' ,
-			'new_item_name'         => 'Новое имя категории' ,
-			'menu_name'             => 'Страны' 
+			'name'                  => __('country','custom-films-plugin'),
+			'singular_name'         => __('Страна' ,'custom-films-plugin'),
+			'search_items'          => __('Поиск категории','custom-films-plugin'),
+			'all_items'             => __('Все категории' ,'custom-films-plugin'),
+			'parent_item'           => __('Родительская категория' ,'custom-films-plugin'),
+			'parent_item_colon'     => __('Родительская категория','custom-films-plugin'),
+			'edit_item'             => __('Редактировать категорию' ,'custom-films-plugin'),
+			'update_item'           => __('Обновить категорию' ,'custom-films-plugin'),
+			'add_new_item'          => __('Добавить новую категорию' ,'custom-films-plugin'),
+			'new_item_name'         => __('Новое имя категории' ,'custom-films-plugin'),
+			'menu_name'             => __('Страны','custom-films-plugin'), 
 		);
 	
 		$args = array(
@@ -182,17 +182,17 @@ function film_country_taxonomies() {
 	function film_actors_taxonomies() {
 	
 		$labels = array(
-			'name'                  => 'Актеры',
-			'singular_name'         => 'Актеры' ,
-			'search_items'          => 'Поиск категории',
-			'all_items'             => 'Все категории' ,
-			'parent_item'           => 'Родительская категория' ,
-			'parent_item_colon'     => 'Родительская категория',
-			'edit_item'             => 'Редактировать категорию' ,
-			'update_item'           => 'Обновить категорию' ,
-			'add_new_item'          => 'Добавить новую категорию' ,
-			'new_item_name'         => 'Новое имя категории' ,
-			'menu_name'             => 'Актеры' 
+			'name'                  => __('actors','custom-films-plugin'),
+			'singular_name'         => __('Актеры' ,'custom-films-plugin'),
+			'search_items'          => __('Поиск категории','custom-films-plugin'),
+			'all_items'             => __('Все категории' ,'custom-films-plugin'),
+			'parent_item'           => __('Родительская категория' ,'custom-films-plugin'),
+			'parent_item_colon'     => __('Родительская категория','custom-films-plugin'),
+			'edit_item'             => __('Редактировать категорию' ,'custom-films-plugin'),
+			'update_item'           => __('Обновить категорию' ,'custom-films-plugin'),
+			'add_new_item'          => __('Добавить новую категорию' ,'custom-films-plugin'),
+			'new_item_name'         => __('Новое имя категории' ,'custom-films-plugin'),
+			'menu_name'             => __('Актеры','custom-films-plugin'),
 		);
 	
 		$args = array(
@@ -230,24 +230,26 @@ if(is_home()|| ! $query->is_main_query()){
 
 function myplugin_add_custom_box(){
 	$screens = array( 'films' );
-	add_meta_box( 'myplugin_sectionid', 'ADD INFO ABOUT FILMS', array($this,'myplugin_meta_box_callback'), $screens );
+	add_meta_box( 'myplugin_sectionid', __('ADD INFO ABOUT FILMS','custom-films-plugin'), array($this,'myplugin_meta_box_callback'), $screens );
 }
 
 // HTML 
 function myplugin_meta_box_callback( $post, $meta ){
 	$screens = $meta['args'];
 
+	$price = !empty($_POST['cfp_price'])?$_POST['cfp_price'] : get_post_meta($post->ID, 'cfp_price', true );
+	$date =!empty($_POST['cfp_date'])?$_POST['cfp_date'] :  get_post_meta($post->ID, 'cfp_date', true );
+	
 	// Use nonce for verify
 	wp_nonce_field( plugin_basename(__FILE__), 'myplugin_noncename' );
 
 	// HTML
 	echo '<label for="cfp_price">' . __("Price of film", 'custom-films-plugin' ) . '</label> ';
-	echo '<input type="number" id= "cfp_price" name="cfp_price" value="" size="25" placeholder="price" required />';
+	echo '<input type="text" id="cfp_price" name="cfp_price" value="'. $price .'" size="25"  required />';
 
 	echo '<label for="cfp_date">' . __("Date of release", 'custom-films-plugin' ) . '</label> ';
-	echo '<input type="date" id= "cfp_date" name="cfp_date" value="" size="25" placeholder="date" required />';
+	echo '<input type="date" id="cfp_date" name="cfp_date" value="'. $date .'"  required />';
 }
-
 
 function myplugin_save_postdata( $post_id ) {
 	
@@ -270,8 +272,44 @@ function myplugin_save_postdata( $post_id ) {
 	$cfp_date = sanitize_text_field( $_POST['cfp_date'] );
 	update_post_meta( $post_id, 'cfp_date', $cfp_date );
 
-	$cfp_price = sanitize_text_field( $_POST['cfp_date'] );
+	$cfp_price = sanitize_text_field( $_POST['cfp_price'] );
 	update_post_meta( $post_id, 'cfp_price', $cfp_price );
 	}
 	/*-----------END CUSTOM-META BOXES--------------*/
+
+public static function get_films($category_slug=null)
+{
+    $args = array(
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'numberposts' => 6,
+        'category_name' => $category_slug,
+        'post_status' => 'publish',
+        'post_type' => array('films')
+    );
+    $posts = get_posts($args);
+    foreach ($posts as $post) {
+        setup_postdata($post);
+        $str = strpos($post->post_content, "\n");
+        $subtitle = strpos($post->post_content,0,$str);
+        $image=get_the_post_thumbnail_url($post,array(500,500));
+		$price=get_post_meta( $post->ID, 'cfp_price',true);
+		$date=get_post_meta( $post->ID, 'cfp_date',true);
+        
+        echo '<div class="mb-layout-cell layout-item-6" style="width: 25%">
+                    <p style="text-align: left">
+                        <img src="'.$image.'" width="208" height="142" style="float: left"><br>
+                    </p>
+                    <p style="text-align: left">
+                        <a href="'.$post->guid.'" target="_self" class="mb-button">'.$post->post_title.'</a>&nbsp;<br>
+                    </p>
+                    <div class="col-sm-3">'.$price.' $</div> <div class="col-sm-3">'.$date.'</div>
+              </div>
+        ';
+        // html
+    }
+wp_reset_postdata(); // reset
+}
+
+
 }
