@@ -24,7 +24,7 @@ class PageTemplater {
 	private function __construct() {
 	add_filter( "single_template", array($this,"get_films_post_type_template"));
 	add_action("template_redirect", array($this,'post_films_redirect'));
-	//add_action('template_include', array($this,'my_template_include'));
+	add_action('template_include', array($this,'my_template_include'));
 
 }
 function get_films_post_type_template($single_template) {
